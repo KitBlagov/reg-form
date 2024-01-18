@@ -16,6 +16,7 @@
         <div class="left-side-with-data-input-wrapper">
 
             <div class="container-registration-data">
+
                 <h2>Let’s get you started</h2>
 
                 <form [formGroup]="registrationForm">
@@ -23,6 +24,7 @@
                     <div class="form-group">
                         <label class="title">Full name</label>
                         <input class="form-control" formControlName="fullName" type="text">
+
                     </div>
 
                     <div class="form-group">
@@ -38,6 +40,26 @@
                     <div class="form-group">
                         <label class="title">Create password</label>
                         <input class="form-control" formControlName="createPassword" type="text">
+
+                        <div *ngIf="createPassword">
+                            <div *ngIf="createPassword.errors?.['required']">
+                                Password is required
+                            </div>
+
+                            <div *ngIf="createPassword.errors?.['minlength']">
+                                Password must be at least 8 characters long
+                            </div>
+
+                            <div *ngIf="createPassword.errors?.['password']">
+                                Password must contain a special character
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="rules-password">
+                        <p>Password must contain a minimum of 8 characters</p>
+                        <p>Password must contain at least one symbol "e.g. &#64;, !"</p>
                     </div>
 
                     <div class="form-group">

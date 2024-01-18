@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -7,27 +7,41 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   templateUrl: './registration-form.component.html',
   styleUrl: './registration-form.component.scss'
 })
-export class RegistrationFormComponent implements OnInit {
-  registrationForm!: FormGroup;
+export class RegistrationFormComponent {
+  registrationForm: FormGroup;
 
-  get userName() {
-    return this.registrationForm.get('userName');
+  get fullName() {
+    return this.registrationForm.get('fullName');
   }
 
   get email() {
     return this.registrationForm.get('emailAddress');
   }
 
-  constructor(private fb: FormBuilder) {}
+  get createPassword() {
+    return this.registrationForm.get('createPassword');
+  }
 
-  ngOnInit() {
+  passwordValidator(control: FormControl): {[s: string]: boolean} | null {
+    const regex = new RegExp('[@!#$%^&*()<>?/\|}{~:]');
+
+    if(!regex.test(control.value)) {
+      return { 'password': true };
+    }
+    return null;
+  }
+
+  constructor(private fb: FormBuilder) {
     this.registrationForm = this.fb.group({
-      userName: [''],
+      fullName: ['', [Validators.required]],
       emailAddress: [''],
       phoneNumber: [''],
-      createPassword: [''],
-      confirmPassword: ['']
-    })
+      createPassword: ['', [Validators.required, Validators.minLength(8), this.passwordValidator]],
+      confirmPassword: ['', [Validators.required]]
+    });
   }
+
+
+
 
 }
