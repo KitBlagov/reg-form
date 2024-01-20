@@ -40,8 +40,6 @@ h2 {
   color: transparent;
 }
 
-
-
 .container-registration-data {
   display: flex;
   flex-direction: column;
@@ -164,3 +162,44 @@ h2 {
 }
 //Конец работы с правой частью
 
+// Медиа запросы
+
+/* Для мобильных */
+@media only screen and (max-width: 767px) {
+
+}
+
+/* Для планшетов */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+/* Для десктопов */
+@media only screen and (min-width: 1025px) {
+
+}
+
+@media only screen and (max-width: 767px) {
+
+  .right-side-with-quote {
+    display: none;
+  }
+
+  .left-side-with-data-input-wrapper {
+    width: 100%;
+  }
+
+}
+
+@media only screen and (max-width: 1024px) {
+
+  .right-side-with-quote {
+    width: 0;
+    opacity: 0;
+  }
+
+  .left-side-with-data-input-wrapper {
+    width: 100%;
+  }
+
+}
